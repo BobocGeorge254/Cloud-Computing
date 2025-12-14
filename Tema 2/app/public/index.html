@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <input id="item" />
+  <button onclick="add()">Enter</button>
+  <ul id="list"></ul>
+
+  <script>
+    async function load() {
+      const res = await fetch("/api/items");
+      const items = await res.json();
+      document.getElementById("list").innerHTML =
+        items.map(i => `<li>${i.text}</li>`).join("");
+    }
+
+    async function add() {
+      const text = document.getElementById("item").value;
+      await fetch("/api/items", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text })
+      });
+      load();
+    }
+
+    load();
+  </script>
+</body>
+</html>
+

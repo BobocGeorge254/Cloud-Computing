@@ -1,0 +1,5 @@
+CREATE TABLE Items (
+  id INT IDENTITY PRIMARY KEY,
+  text NVARCHAR(255)
+);
+
